@@ -17,6 +17,20 @@ import {
 } from 'react-router-dom';
 import { models } from './data/models';
 import { useState } from 'react';
+import HomePage from "./pages/HomePage";
+import ModelListDashboardPage from './pages/ModelListDashboardPage';
+import AddModelPage from './pages/AddModelPage';
+import EditModelPage from './pages/EditModelPage';
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+/*
+  Keyla Paguaga Jarquin
+
+  Shared layout components for consistent
+  navigation and footer across pages.
+*/
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 /*
   Nahal Kianpour
@@ -59,102 +73,129 @@ const matchesCategory =
 return matchesSearch && matchesLocation && matchesCategory;
 
 });
+/*
+  Shared contribution - Nahal Kianpour / Keyla Paguaga Jarquin
 
+  Updated page styling using Assignment 1 design system.
+*/
   return (
-    <main className="min-h-screen bg-gray-100 px-4 py-8">
-      <div className="mx-auto max-w-6xl rounded-xl bg-white p-6 shadow-sm">
+<main
+  className="min-h-screen px-4 pt-8 pb-0"
+style={{
+  backgroundImage: "url('/cities-paris-black-and-white-city-wallpaper.jpg')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundColor: "rgba(0,0,0,0.45)",
+  backgroundBlendMode: "darken",
+}}
+>
+<div className="mx-auto max-w-7xl rounded-3xl bg-[rgba(35,35,35,0.78)] backdrop-blur-xl shadow-2xl overflow-hidden">
 
-        {/* Page heading */}
-        <h1 className="text-3xl font-bold mb-6">
-          Browse Models
-        </h1>
+  {/* Page heading */}
+  <div className="bbg-[rgba(25,25,25,0.85)] px-16 py-12 text-white">
 
-        {/* Search and filter interface (UI prototype) */}
-        <div className="mb-6 flex gap-4">
+    <p className="mb-2 text-xs uppercase tracking-[0.3em] text-secondary">
+      Welcome to our agency
+    </p>
 
-        <input
-          type="text"
-          placeholder="Search models"
-          value={searchTerm}
-          onChange={function(e) {
-            setSearchTerm(e.target.value);
-          }}
-          className="border rounded px-3 py-2"
-        />
+    <h1 className="font-heading text-4xl md:text-5xl text-gray-100 leading-tight">
+      Browse Professional Models
+    </h1>
 
-          {/* Nahal Kianpour
-            Location filter dropdown
-          */}
+    <p className="mt-4 max-w-xl text-lg text-gray-300">
+      Explore our curated talent portfolio for fashion,
+      editorial and commercial campaigns.
+    </p>
 
-          <select
-            value={selectedLocation}
-            onChange={function(e) {
-              setSelectedLocation(e.target.value);
-            }}
-            className="border p-2 rounded"
+  </div>
+
+  {/* Search and filter + cards */}
+  <div className="px-10 py-10 bg-[rgba(55,55,55,0.55)]">
+
+    {/* Search and filter interface */}
+    <div className="mb-8 flex flex-wrap gap-4">
+
+      <input
+        type="text"
+        placeholder="Search models"
+        value={searchTerm}
+        onChange={function(e) {
+          setSearchTerm(e.target.value);
+        }}
+        className="rounded-xl border border-white/10 bg-white/95 px-5 py-3 text-textmain shadow-md"
+      />
+
+      <select
+        value={selectedLocation}
+        onChange={function(e) {
+          setSelectedLocation(e.target.value);
+        }}
+        className="rounded-xl border border-white/10 bg-white/95 px-5 py-3 text-textmain shadow-md"
+      >
+        <option value="">Location</option>
+        <option value="Dublin">Dublin</option>
+        <option value="Cork">Cork</option>
+        <option value="Galway">Galway</option>
+      </select>
+
+      <select
+        value={selectedCategory}
+        onChange={function(e) {
+          setSelectedCategory(e.target.value);
+        }}
+        className="rounded-lg border border-secondary bg-surface px-4 py-3 text-textmain shadow-sm"
+      >
+        <option value="">Category</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Editorial">Editorial</option>
+        <option value="Commercial">Commercial</option>
+      </select>
+
+    </div>
+
+    {/* Render one model card for each mock model record */}
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+      {filteredModels.map(function(model) {
+        return (
+          <div
+            key={model.id}
+            className="rounded-2xl bg-white/95 p-5 shadow-xl hover:scale-[1.02] transition-all"
           >
-            <option value="">Location</option>
-            <option value="Dublin">Dublin</option>
-            <option value="Cork">Cork</option>
-            <option value="Galway">Galway</option>
-          </select>
 
-      {/* Nahal Kianpour Category filter dropdown*/}
-    <select
-      value={selectedCategory}
-      onChange={function(e) {
-        setSelectedCategory(e.target.value);
-      }}
-      className="border p-2 rounded"
-    >
-      <option value="">Category</option>
-      <option value="Fashion">Fashion</option>
-      <option value="Editorial">Editorial</option>
-      <option value="Commercial">Commercial</option>
-    </select>
+            {/* Placeholder image area */}
+            <div className="mb-5 h-44 rounded-xl bg-gradient-to-br from-gray-200 to-gray-100"></div>
 
-        </div>
+            {/* Basic model summary information */}
+            <h2 className="font-semibold">
+              {model.name}
+            </h2>
 
+            <p>
+              {model.category} | {model.location}
+            </p>
 
-        {/* Render one model card for each mock model record */}
-        <div className="grid md:grid-cols-3 gap-6">
-          
-          {filteredModels.map(function(model) {
-            return (
-              <div
-                key={model.id}
-                className="border rounded-lg p-4"
-              >
+            {/* Link to model profile route */}
+            <Link
+              to={'/models/' + model.id}
+              className="mt-5 inline-block rounded-lg bg-accent px-5 py-2 text-white transition hover:opacity-90"
+            >
+              View Profile
+            </Link>
 
-                {/* Placeholder image area */}
-                <div className="h-40 bg-gray-200 mb-4"></div>
+          </div>
+        );
+      })}
 
-                {/* Basic model summary information */}
-                <h2 className="font-semibold">
-                  {model.name}
-                </h2>
+    </div>
 
-                <p>
-                  {model.category} | {model.location}
-                </p>
+  </div>
 
-                {/* Link to model profile route */}
-                <Link
-                  to={'/models/' + model.id}
-                  className="inline-block mt-4 border px-4 py-2 rounded"
-                >
-                  View Profile
-                </Link>
+</div>
 
-              </div>
-            );
-          })}
-
-        </div>
-
-      </div>
-    </main>
-  );
+</main>
+);
 }
 
 function ModelProfilePage() {
@@ -228,11 +269,25 @@ function ModelProfilePage() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/models" replace />} />
-        <Route path="/models" element={<BrowseModelsPage />} />
-        <Route path="/models/:id" element={<ModelProfilePage />} />
-      </Routes>
+<Routes>
+  <Route path="/" element={<><Navbar /><HomePage /><Footer /></>} />
+  <Route path="/models" element={<><Navbar /><BrowseModelsPage /><Footer /></>} />
+  <Route path="/models/:id" element={<><Navbar /><ModelProfilePage /><Footer /></>} />
+  <Route path="/agency/models" element={<><Navbar /><ModelListDashboardPage /><Footer /></>} />
+    <Route
+    path="/agency/models/add"
+    element={
+      <>
+        <Navbar />
+        <AddModelPage />
+        <Footer />
+      </>
+    }
+  />
+  <Route path="/agency/models/edit/:id" element={<EditModelPage />} />
+  <Route path="/register" element={<><Navbar /><RegisterPage /><Footer /></>} />
+  <Route path="/login" element={<><Navbar /><LoginPage /><Footer /></>} />
+</Routes>
     </BrowserRouter>
   );
 }
