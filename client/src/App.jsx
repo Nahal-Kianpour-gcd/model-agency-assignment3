@@ -2,14 +2,17 @@
   Nahal Kianpour
 
   Description:
-  Main routing setup for the current frontend pages.
-  At this stage, routes for the Browse Models page and
-  Model Profile page are included.
+  Main routing setup for the frontend.
+
+  This file controls navigation between pages
+  using React Router.
+
+  It also contains the Browse Models page
+  and Model Profile page components.
 */
 
 import {
   BrowserRouter,
-  Navigate,
   Route,
   Routes,
   Link,
@@ -47,13 +50,21 @@ import Footer from './components/Footer';
 */
 
 function BrowseModelsPage() {
+{/*
+  Nahal Kianpour
 
+  Stores current filter values
+  selected by the user.
+*/}
 const [searchTerm, setSearchTerm] = useState('');
 const [selectedLocation, setSelectedLocation] = useState('');
 const [selectedCategory, setSelectedCategory] = useState('');
 
 {/* Nahal Kianpour
-   Combined search and location filtering
+  Filters models based on:
+  - search input
+  - selected location
+  - selected category
 */}
 const filteredModels = models.filter(function(model) {
 
@@ -93,7 +104,7 @@ style={{
 <div className="mx-auto max-w-7xl rounded-3xl bg-[rgba(35,35,35,0.78)] backdrop-blur-xl shadow-2xl overflow-hidden">
 
   {/* Page heading */}
-  <div className="bbg-[rgba(25,25,25,0.85)] px-16 py-12 text-white">
+  <div className="bg-[rgba(25,25,25,0.85)] px-16 py-12 text-white">
 
     <p className="mb-2 text-xs uppercase tracking-[0.3em] text-secondary">
       Welcome to our agency
@@ -154,7 +165,12 @@ style={{
 
     </div>
 
-    {/* Render one model card for each mock model record */}
+  {/* 
+  Nahal Kianpour
+
+  Loops through filtered models
+  and creates one card for each.
+*/}
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
       {filteredModels.map(function(model) {
@@ -198,10 +214,22 @@ style={{
 );
 }
 
+/*
+  Nahal Kianpour
+
+  Displays full details for
+  one selected model.
+*/
 function ModelProfilePage() {
 
   const params = useParams();
+{/*
+  Nahal Kianpour
 
+  Finds the selected model
+  using the ID from the URL.
+*/
+}
   const model = models.find(function(item) {
     return item.id === Number(params.id);
   });
@@ -269,10 +297,24 @@ function ModelProfilePage() {
 export default function App() {
   return (
     <BrowserRouter>
+  {/* 
+  Nahal Kianpour
+
+  All frontend routes are defined here.
+*/}
 <Routes>
   <Route path="/" element={<><Navbar /><HomePage /><Footer /></>} />
   <Route path="/models" element={<><Navbar /><BrowseModelsPage /><Footer /></>} />
-  <Route path="/models/:id" element={<><Navbar /><ModelProfilePage /><Footer /></>} />
+  <Route
+  path="/agency/models/edit/:id"
+  element={
+    <>
+      <Navbar />
+      <EditModelPage />
+      <Footer />
+    </>
+  }
+/>
   <Route path="/agency/models" element={<><Navbar /><ModelListDashboardPage /><Footer /></>} />
     <Route
     path="/agency/models/add"

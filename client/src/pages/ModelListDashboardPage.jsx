@@ -1,13 +1,16 @@
- /*
+/*
   Thanh Phuong Hoang
 
   Description:
-  Agency-side model list dashboard.
-  This page displays models in table format and provides
-  access to Add Model and Edit Model pages.
+  Agency-side Model List Dashboard.
 
-  This page follows Thanh Phuong's wireframe for the
-  Model List Dashboard.
+  This page allows agency users to view
+  all registered models in a table layout.
+
+  It also provides navigation to Add Model
+  and Edit Model pages.
+
+  This page follows the proposed Assignment 1 wireframe design.
 */
 
 import { Link } from 'react-router-dom';
@@ -18,15 +21,30 @@ export default function ModelListDashboardPage() {
     <main
       className="min-h-screen px-4 py-8 font-body"
       style={{
+        /*
+          Thanh Phuong Hoang
+
+          Background gradient styling
+          to match the dark modern theme.
+        */
         background:
           "linear-gradient(135deg, rgba(45,45,45,0.96), rgba(60,60,60,0.92), rgba(249,123,107,0.08))",
       }}
     >
 
+      {/*
+        Thanh Phuong Hoang
+
+        Main page container with rounded corners,
+        shadow, and glassmorphism effect.
+      */}
       <div className="mx-auto max-w-6xl rounded-3xl bg-[rgba(255,255,255,0.90)] p-10 shadow-2xl backdrop-blur-xl">
 
-        {/* Thanh Phuong Hoang
-          Page heading section
+        {/*
+          Thanh Phuong Hoang
+
+          Page heading section with title
+          and Add Model button.
         */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -38,6 +56,7 @@ export default function ModelListDashboardPage() {
             </p>
           </div>
 
+          {/* Button to navigate to Add Model page */}
           <Link
             to="/agency/models/add"
             className="rounded-xl bg-accent px-5 py-3 text-white shadow-md hover:opacity-90"
@@ -46,15 +65,21 @@ export default function ModelListDashboardPage() {
           </Link>
         </div>
 
-        {/* Thanh Phuong Hoang
-           Model table section
+        {/*
+          Thanh Phuong Hoang
+
+          Table section showing all model records.
         */}
         <div className="overflow-x-auto rounded-2xl bg-white p-6 shadow-lg border border-gray-200">
+
+          {/* Shows total number of models */}
           <h3 className="mb-6 text-xl font-semibold text-primary">
             All Models ({models.length})
           </h3>
 
           <table className="w-full min-w-[800px] border-collapse">
+
+            {/* Table headings */}
             <thead>
               <tr className="border-b border-gray-300 text-left text-primary">
                 <th className="pb-4 pr-4">Photo</th>
@@ -67,12 +92,19 @@ export default function ModelListDashboardPage() {
             </thead>
 
             <tbody>
+              {/*
+                Thanh Phuong Hoang
+
+                Loops through the models array
+                and creates one row per model.
+              */}
               {models.map(function(model) {
                 return (
                   <tr
                     key={model.id}
                     className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50"
                   >
+                    {/* Model image or placeholder */}
                     <td className="py-5 pr-4">
                       {model.imageUrl ? (
                         <img
@@ -85,22 +117,27 @@ export default function ModelListDashboardPage() {
                       )}
                     </td>
 
+                    {/* Model name */}
                     <td className="py-5 pr-4 font-medium text-primary">
                       {model.name}
                     </td>
 
+                    {/* Model age */}
                     <td className="py-5 pr-4">
                       {model.age}
                     </td>
 
+                    {/* Model height */}
                     <td className="py-5 pr-4">
                       {model.heightCm} cm
                     </td>
 
+                    {/* Model specialty/category */}
                     <td className="py-5 pr-4">
                       {model.category}
                     </td>
 
+                    {/* Edit button */}
                     <td className="py-5 pr-4">
                       <Link
                         to={'/agency/models/edit/' + model.id}
@@ -113,6 +150,7 @@ export default function ModelListDashboardPage() {
                 );
               })}
             </tbody>
+
           </table>
         </div>
 

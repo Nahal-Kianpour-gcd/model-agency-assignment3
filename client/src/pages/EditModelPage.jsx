@@ -3,8 +3,15 @@
 
   Description:
   Edit Model page.
-  This page follows Thanh Phuong's wireframe style
-  and pre-fills model data from mock records.
+
+  This page allows agency users to update
+  an existing model profile.
+
+  The form is pre-filled using the selected
+  model's current information from mock data.
+
+  It also includes client-side validation
+  before saving changes.
 */
 
 import { useState } from 'react';
@@ -13,17 +20,44 @@ import { models } from '../data/models';
 
 export default function EditModelPage() {
 
+  /*
+    Thanh Phuong Hoang
+
+    Gets the model ID from the URL
+    and allows page redirection.
+  */
   const params = useParams();
   const navigate = useNavigate();
 
+  /*
+    Thanh Phuong Hoang
+
+    Finds the selected model from the
+    mock data array using the ID from URL.
+  */
   const existingModel = models.find(function(item) {
     return item.id === Number(params.id);
   });
 
+  /*
+    Thanh Phuong Hoang
+
+    If no matching model is found,
+    show an error message.
+  */
   if (!existingModel) {
     return <h1>Model not found</h1>;
   }
 
+  /*
+    Thanh Phuong Hoang
+
+    Pre-fills the form with existing
+    model information.
+
+    If any field is missing, it uses
+    an empty string instead.
+  */
   const [formData, setFormData] = useState({
     name: existingModel.name || '',
     age: existingModel.age || '',
@@ -34,8 +68,20 @@ export default function EditModelPage() {
     biography: existingModel.bio || ''
   });
 
+  /*
+    Thanh Phuong Hoang
+
+    Stores validation error messages
+    for each form field.
+  */
   const [errors, setErrors] = useState({});
 
+  /*
+    Thanh Phuong Hoang
+
+    Updates form input values when
+    the user types in any field.
+  */
   function handleChange(e) {
     setFormData({
       ...formData,
@@ -43,6 +89,16 @@ export default function EditModelPage() {
     });
   }
 
+  /*
+    Thanh Phuong Hoang
+
+    Checks if required fields are filled.
+
+    Also checks if Age is a number.
+
+    If something is wrong, the correct
+    error message is shown under the field.
+  */
   function validateForm() {
 
     const newErrors = {};
@@ -74,6 +130,14 @@ export default function EditModelPage() {
     return Object.keys(newErrors).length === 0;
   }
 
+  /*
+    Thanh Phuong Hoang
+
+    Runs when the form is submitted.
+
+    Stops page refresh, validates input,
+    and redirects back after success.
+  */
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -90,8 +154,11 @@ export default function EditModelPage() {
 
       <div className="mx-auto max-w-6xl rounded-xl bg-white p-8 shadow-sm">
 
-        {/* Thanh Phuong Hoang
-           Top navigation area matching wireframe structure
+        {/* 
+          Thanh Phuong Hoang
+
+          Top navigation area matching
+          Assignment 1 wireframe style.
         */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b pb-4">
 
@@ -102,9 +169,11 @@ export default function EditModelPage() {
 
             <nav className="flex gap-6 text-gray-600">
               <span>Dashboard</span>
+
               <Link to="/agency/models" className="hover:text-black">
                 Models
               </Link>
+
               <span className="font-semibold text-black border-b-2 border-blue-500 pb-1">
                 Edit Model
               </span>
@@ -118,6 +187,7 @@ export default function EditModelPage() {
 
         <div className="mx-auto max-w-4xl">
 
+          {/* Back button */}
           <Link
             to="/agency/models"
             className="inline-block mb-6"
@@ -125,6 +195,7 @@ export default function EditModelPage() {
             ← Back to Models
           </Link>
 
+          {/* Page heading */}
           <h2 className="text-5xl font-bold mb-2">
             Edit Model
           </h2>
@@ -135,6 +206,11 @@ export default function EditModelPage() {
 
           <form onSubmit={handleSubmit} className="space-y-8">
 
+            {/* 
+              Thanh Phuong Hoang
+
+              Main model information section.
+            */}
             <div className="rounded-xl border bg-white p-6">
               <h3 className="mb-6 text-xl font-semibold">
                 Model Information
@@ -142,6 +218,7 @@ export default function EditModelPage() {
 
               <div className="grid gap-6 md:grid-cols-2">
 
+                {/* Name input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Name <span className="text-red-500">*</span>
@@ -160,6 +237,7 @@ export default function EditModelPage() {
                   )}
                 </div>
 
+                {/* Age input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Age <span className="text-red-500">*</span>
@@ -178,6 +256,7 @@ export default function EditModelPage() {
                   )}
                 </div>
 
+                {/* Height input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Height <span className="text-red-500">*</span>
@@ -196,6 +275,7 @@ export default function EditModelPage() {
                   )}
                 </div>
 
+                {/* Measurements input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Measurements
@@ -211,6 +291,7 @@ export default function EditModelPage() {
 
               </div>
 
+              {/* Specialty input */}
               <div className="mt-6">
                 <label className="mb-2 block font-medium">
                   Modeling Specialty <span className="text-red-500">*</span>
@@ -230,8 +311,14 @@ export default function EditModelPage() {
               </div>
             </div>
 
+            {/* 
+              Thanh Phuong Hoang
+
+              Additional model information section.
+            */}
             <div className="rounded-xl border bg-white p-6">
 
+              {/* Photo URL input */}
               <div className="mb-6">
                 <label className="mb-2 block font-medium">
                   Photo URL
@@ -245,6 +332,7 @@ export default function EditModelPage() {
                 />
               </div>
 
+              {/* Biography input */}
               <div>
                 <label className="mb-2 block font-medium">
                   Biography <span className="text-red-500">*</span>
@@ -263,6 +351,7 @@ export default function EditModelPage() {
                 )}
               </div>
 
+              {/* Action buttons */}
               <div className="mt-8 flex flex-col gap-4 md:flex-row">
                 <button
                   type="submit"

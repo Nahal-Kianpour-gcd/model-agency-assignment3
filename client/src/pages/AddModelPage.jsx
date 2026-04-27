@@ -3,8 +3,16 @@
 
   Description:
   Add Model page.
-  This page follows Thanh Phuong's Add New Model wireframe
-  and includes client-side validation.
+
+  This page allows agency users to create
+  a new model profile by entering the model's
+  details into the form.
+
+  The page includes client-side validation
+  to ensure important fields are completed
+  before submission.
+
+  The design follows the proposed Assignment 1 wireframe.
 */
 
 import { useState } from 'react';
@@ -14,8 +22,11 @@ export default function AddModelPage() {
 
   const navigate = useNavigate();
 
-  /* Thanh Phuong Hoang
-     Form state
+  /*
+    Thanh Phuong Hoang
+
+    Stores all form input values entered
+    by the user for the new model profile.
   */
   const [formData, setFormData] = useState({
     name: '',
@@ -27,11 +38,20 @@ export default function AddModelPage() {
     biography: ''
   });
 
-  /* Thanh Phuong Hoang
-     Validation errors
+  /*
+    Thanh Phuong Hoang
+
+    Stores validation error messages
+    for each form field if needed.
   */
   const [errors, setErrors] = useState({});
 
+  /*
+    Thanh Phuong Hoang
+
+    Updates the correct form field dynamically
+    whenever the user types into an input.
+  */
   function handleChange(e) {
     setFormData({
       ...formData,
@@ -39,6 +59,15 @@ export default function AddModelPage() {
     });
   }
 
+  /*
+    Thanh Phuong Hoang
+
+    Validates all required fields before
+    allowing the form to be submitted.
+
+    Returns true if validation passes,
+    otherwise false.
+  */
   function validateForm() {
     const newErrors = {};
 
@@ -69,6 +98,16 @@ export default function AddModelPage() {
     return Object.keys(newErrors).length === 0;
   }
 
+  /*
+    Thanh Phuong Hoang
+
+    Handles form submission.
+
+    First checks validation.
+    If valid, it simulates saving the model
+    and redirects the user back to the
+    Manage Models page.
+  */
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -93,6 +132,7 @@ export default function AddModelPage() {
 
         <div className="mx-auto max-w-4xl">
 
+          {/* Navigation link back to Manage Models page */}
           <Link
             to="/agency/models"
             className="inline-block mb-6 text-gray-300 hover:text-white"
@@ -100,6 +140,7 @@ export default function AddModelPage() {
             ← Back to Models
           </Link>
 
+          {/* Page heading and description */}
           <h2 className="font-heading text-5xl mb-2 text-white">
             Add New Model
           </h2>
@@ -110,8 +151,13 @@ export default function AddModelPage() {
 
           <form onSubmit={handleSubmit} className="space-y-8">
 
-            {/* Thanh Phuong Hoang
-               Model information card
+            {/*
+              Thanh Phuong Hoang
+
+              Main model information section.
+
+              This section collects the basic
+              required details about the model.
             */}
             <div className="rounded-2xl border border-white/10 bg-white/95 p-6 text-black shadow-lg">
               <h3 className="mb-6 text-xl font-semibold">
@@ -120,6 +166,7 @@ export default function AddModelPage() {
 
               <div className="grid gap-6 md:grid-cols-2">
 
+                {/* Name input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Name <span className="text-red-500">*</span>
@@ -139,6 +186,7 @@ export default function AddModelPage() {
                   )}
                 </div>
 
+                {/* Age input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Age <span className="text-red-500">*</span>
@@ -158,6 +206,7 @@ export default function AddModelPage() {
                   )}
                 </div>
 
+                {/* Height input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Height <span className="text-red-500">*</span>
@@ -177,6 +226,7 @@ export default function AddModelPage() {
                   )}
                 </div>
 
+                {/* Measurements input */}
                 <div>
                   <label className="mb-2 block font-medium">
                     Measurements
@@ -193,6 +243,7 @@ export default function AddModelPage() {
 
               </div>
 
+              {/* Specialty input */}
               <div className="mt-6">
                 <label className="mb-2 block font-medium">
                   Modeling Specialty <span className="text-red-500">*</span>
@@ -213,11 +264,17 @@ export default function AddModelPage() {
               </div>
             </div>
 
-            {/* Thanh Phuong Hoang
-               Additional information card
+            {/*
+              Thanh Phuong Hoang
+
+              Additional model information section.
+
+              Allows optional image input and
+              biography details.
             */}
             <div className="rounded-2xl border border-white/10 bg-white/95 p-6 text-black shadow-lg">
 
+              {/* Photo URL input */}
               <div className="mb-6">
                 <label className="mb-2 block font-medium">
                   Photo URL
@@ -230,11 +287,9 @@ export default function AddModelPage() {
                   onChange={handleChange}
                   className="w-full rounded border p-3"
                 />
-                <p className="mt-2 text-sm text-gray-500">
-                  Leave blank to use a default photo
-                </p>
               </div>
 
+              {/* Biography input */}
               <div>
                 <label className="mb-2 block font-medium">
                   Biography <span className="text-red-500">*</span>
@@ -247,13 +302,9 @@ export default function AddModelPage() {
                   rows="4"
                   className="w-full rounded border p-3"
                 />
-                {errors.biography && (
-                  <p className="mt-1 text-red-500">
-                    {errors.biography}
-                  </p>
-                )}
               </div>
 
+              {/* Form action buttons */}
               <div className="mt-8 flex flex-col gap-4 md:flex-row">
                 <button
                   type="submit"
