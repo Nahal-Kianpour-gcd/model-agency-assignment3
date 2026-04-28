@@ -1,45 +1,26 @@
-/*
-  Nahal Kianpour
-
-  Description:
-  This file stores mock model data used by the Browse Models page.
-
-  The assignment brief permits mock data for frontend interaction,
-  so this data is used to simulate records that would normally be
-  retrieved from the backend API.
-
-  Each object represents a model profile and includes key attributes
-  needed for listing, filtering, and linking to the model profile view.
-*/
-
 export const models = [
   {
     id: 1,
-    name: "Sophia Murphy",
-    category: "Fashion",
-    location: "Dublin",
+    name: "Sophia Martinez",
+    age: 24,
     heightCm: 175,
-    bio: "Fashion model based in Dublin with editorial and commercial experience.",
-    availability: "Available"
+    category: "Fashion & Editorial",
+    imageUrl: "/sophia.png"
   },
-
   {
     id: 2,
-    name: "Emma Thompson",
-    category: "Editorial",
-    location: "Cork",
+    name: "Sara Williams",
+    age: 22,
     heightCm: 178,
-    bio: "Editorial model with experience in campaigns and studio work.",
-    availability: "Available"
+    category: "Commercial & Lifestyle",
+    imageUrl: "/sara.png"
   },
-
   {
     id: 3,
     name: "Olivia Chen",
-    category: "Commercial",
-    location: "Galway",
-    heightCm: 172,
-    bio: "Commercial model experienced in advertising and promotional work.",
-    availability: "Booked"
+    age: 26,
+    heightCm: 173,
+    category: "Runway & High Fashion",
+    imageUrl: "/olivia.png"
   }
 ];

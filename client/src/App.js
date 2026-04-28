@@ -181,8 +181,12 @@ style={{
             className="rounded-2xl bg-white/95 p-5 shadow-xl hover:scale-[1.02] transition-all"
           >
 
-            {/* Placeholder image area */}
-            <div className="mb-5 h-44 rounded-xl bg-gradient-to-br from-gray-200 to-gray-100"></div>
+                {/* Placeholder image area */}
+<img
+  src={model.imageUrl}
+  alt={model.name}
+  className="mb-5 h-56 w-full rounded-xl object-cover object-top"
+/>
 
             {/* Basic model summary information */}
             <h2 className="font-semibold">
