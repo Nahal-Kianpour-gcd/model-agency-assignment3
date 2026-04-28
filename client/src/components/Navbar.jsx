@@ -35,6 +35,8 @@ export default function Navbar() {
             Browse Models
           </Link>
 
+          <Link to="/agency/dashboard">Dashboard</Link>
+
           <Link
             to="/agency/models"
             className="rounded-full px-4 py-2 hover:bg-white/10 transition"

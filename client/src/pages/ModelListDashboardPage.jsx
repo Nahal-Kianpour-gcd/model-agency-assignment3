@@ -13,10 +13,26 @@
   This page follows the proposed Assignment 1 wireframe design.
 */
 
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { models } from '../data/models';
 
 export default function ModelListDashboardPage() {
+  const [modelList, setModelList] = useState(models);
+/*Keyla Paguaga
+
+Description:
+
+Handles the deletion of a model from the list.
+When the delete button is clicked, it prompts the user for confirmation.
+
+
+*/
+  function handleDelete(id) {
+    if (!window.confirm('Are you sure you want to delete this model?')) return;
+    setModelList(prev => prev.filter(m => m.id !== id));
+  }
+
   return (
     <main
       className="min-h-screen px-4 py-8 font-body"
@@ -74,7 +90,7 @@ export default function ModelListDashboardPage() {
 
           {/* Shows total number of models */}
           <h3 className="mb-6 text-xl font-semibold text-primary">
-            All Models ({models.length})
+            All Models ({modelList.length})
           </h3>
 
           <table className="w-full min-w-[800px] border-collapse">
@@ -98,7 +114,7 @@ export default function ModelListDashboardPage() {
                 Loops through the models array
                 and creates one row per model.
               */}
-              {models.map(function(model) {
+              {modelList.map(function(model) {
                 return (
                   <tr
                     key={model.id}
@@ -137,14 +153,23 @@ export default function ModelListDashboardPage() {
                       {model.category}
                     </td>
 
-                    {/* Edit button */}
+                    {/* Actions: Edit + Delete */}
                     <td className="py-5 pr-4">
-                      <Link
-                        to={'/agency/models/edit/' + model.id}
-                        className="inline-block rounded-xl border border-primary px-4 py-2 text-primary hover:bg-primary hover:text-white"
-                      >
-                        Edit
-                      </Link>
+                      <div className="flex flex-col items-start gap-2">
+                        <Link
+                          to={'/agency/models/edit/' + model.id}
+                          className="inline-block rounded-xl border border-primary px-4 py-2 text-primary hover:bg-primary hover:text-white"
+                        >
+                          Edit
+                        </Link>
+
+                        <button
+                          onClick={() => handleDelete(model.id)}
+                          className="inline-block rounded-xl bg-red-500 px-4 py-2 text-white hover:opacity-90"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );

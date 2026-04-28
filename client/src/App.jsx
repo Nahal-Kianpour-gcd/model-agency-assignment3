@@ -26,6 +26,7 @@ import AddModelPage from './pages/AddModelPage';
 import EditModelPage from './pages/EditModelPage';
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import AgencyDashboardPage from './pages/AgencyDashboardPage';
 /*
   Keyla Paguaga Jarquin
 
@@ -329,6 +330,16 @@ export default function App() {
   <Route path="/agency/models/edit/:id" element={<EditModelPage />} />
   <Route path="/register" element={<><Navbar /><RegisterPage /><Footer /></>} />
   <Route path="/login" element={<><Navbar /><LoginPage /><Footer /></>} />
+  <Route
+  path="/agency/dashboard"
+  element={
+    <>
+      <Navbar />
+      <AgencyDashboardPage />
+      <Footer />
+    </>
+  }
+/>
 </Routes>
     </BrowserRouter>
   );
