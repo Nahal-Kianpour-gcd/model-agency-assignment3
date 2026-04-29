@@ -344,6 +344,16 @@ export default function App() {
     </>
   }
 />
+<Route
+  path="/models/:id"
+  element={
+    <>
+      <Navbar />
+      <ModelProfilePage />
+      <Footer />
+    </>
+  }
+/>
 </Routes>
     </BrowserRouter>
   );

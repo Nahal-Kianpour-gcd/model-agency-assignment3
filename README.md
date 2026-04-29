@@ -121,8 +121,9 @@ I implemented the Login page and Register page, including form inputs, validatio
 These pages provide the entry point for users to access the system.
 
 ### Keyla Paguaga Jarquin
-
-Pending submission.
+I worked on improving the overall user interface and functionality of the application. 
+I made sure the UI is consistent across all pages and improved the responsive layout so it works well on different devices. 
+I also ensured smooth navigation by setting up proper routing between pages. In addition, I added client-side validation to forms, included clear code comments, and helped prepare and deploy the frontend on Render. -Sorry for sending like that -
 
 ---
 
