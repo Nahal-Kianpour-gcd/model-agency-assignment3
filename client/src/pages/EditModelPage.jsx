@@ -154,36 +154,6 @@ export default function EditModelPage() {
 
       <div className="mx-auto max-w-6xl rounded-xl bg-white p-8 shadow-sm">
 
-        {/* 
-          Thanh Phuong Hoang
-
-          Top navigation area matching
-          Assignment 1 wireframe style.
-        */}
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b pb-4">
-
-          <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold">
-              Valerie Agency
-            </h1>
-
-            <nav className="flex gap-6 text-gray-600">
-              <span>Dashboard</span>
-
-              <Link to="/agency/models" className="hover:text-black">
-                Models
-              </Link>
-
-              <span className="font-semibold text-black border-b-2 border-blue-500 pb-1">
-                Edit Model
-              </span>
-            </nav>
-          </div>
-
-          <button className="border px-4 py-2 rounded">
-            Logout
-          </button>
-        </div>
 
         <div className="mx-auto max-w-4xl">
 
